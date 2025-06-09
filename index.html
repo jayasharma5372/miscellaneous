@@ -1,0 +1,1566 @@
+<!-- generate a futurestic ai-powered website interface for a 'prompt to website generator ' tool. the design should be sleek,modern,and minimalistic,with a dark mode ui featuring neon blue and purple accents. the homepage should showcase a large ai-powered input box where users can enter a text prompt.with a dynamic preview of a website being generated in ral-time.include futuristic icons, smooth gradients, and glowing ui elements to enhance the tech-driven feel. the header should have a simple logo, navigation menu(Home, how it works,features,pricing, login/signup). the main call-to-action button should say 'generate website now." the overall design should fell cutting-edge., intuitive,and visually engaging.perfect for a next-gen ai tool -->
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>AI Prompt to Website Generator</title>
+    <script src="https://cdn.tailwindcss.com/3.4.16"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: { primary: "#6366f1", secondary: "#a855f7" },
+            borderRadius: {
+              none: "0px",
+              sm: "4px",
+              DEFAULT: "8px",
+              md: "12px",
+              lg: "16px",
+              xl: "20px",
+              "2xl": "24px",
+              "3xl": "32px",
+              full: "9999px",
+              button: "8px",
+            },
+          },
+        },
+      };
+    </script>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Orbitron:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/4.6.0/remixicon.min.css"
+    />
+    <style>
+      :where([class^="ri-"])::before { content: "\f3c2"; }
+
+      :root {
+          --dark-bg: #0f172a;
+          --card-bg: #1e293b;
+          --neon-blue: #38bdf8;
+          --neon-purple: #a855f7;
+      }
+
+      body {
+          font-family: 'Inter', sans-serif;
+          background-color: var(--dark-bg);
+          color: #f8fafc;
+          overflow-x: hidden;
+      }
+
+      .futuristic-heading {
+          font-family: 'Orbitron', sans-serif;
+      }
+
+      .logo-text {
+          font-family: 'Pacifico', serif;
+          background: linear-gradient(to right, var(--neon-blue), var(--neon-purple));
+          -webkit-background-clip: text;
+          background-clip: text;
+          color: transparent;
+          text-shadow: 0 0 10px rgba(56, 189, 248, 0.3);
+      }
+
+      .glow-border {
+          position: relative;
+      }
+
+      .glow-border::before {
+          content: '';
+          position: absolute;
+          top: -2px;
+          left: -2px;
+          right: -2px;
+          bottom: -2px;
+          background: linear-gradient(45deg, var(--neon-blue), var(--neon-purple));
+          border-radius: 12px;
+          z-index: -1;
+          opacity: 0;
+          transition: opacity 0.3s ease;
+      }
+
+      .glow-border:hover::before {
+          opacity: 1;
+      }
+
+      .gradient-bg {
+          background: linear-gradient(135deg, var(--neon-blue), var(--neon-purple));
+      }
+
+      .glass-effect {
+          backdrop-filter: blur(10px);
+          background-color: rgba(30, 41, 59, 0.7);
+      }
+
+      .grid-bg {
+          background-image:
+              linear-gradient(rgba(30, 41, 59, 0.3) 1px, transparent 1px),
+              linear-gradient(90deg, rgba(30, 41, 59, 0.3) 1px, transparent 1px);
+          background-size: 20px 20px;
+      }
+
+      .floating {
+          animation: float 6s ease-in-out infinite;
+      }
+
+      @keyframes float {
+          0% { transform: translateY(0px); }
+          50% { transform: translateY(-20px); }
+          100% { transform: translateY(0px); }
+      }
+
+      .glow {
+          box-shadow: 0 0 15px rgba(56, 189, 248, 0.5);
+      }
+
+      .glow-text {
+          text-shadow: 0 0 10px rgba(56, 189, 248, 0.5);
+      }
+
+      .typing-animation::after {
+          content: '|';
+          animation: blink 1s step-end infinite;
+      }
+
+      @keyframes blink {
+          from, to { opacity: 1; }
+          50% { opacity: 0; }
+      }
+
+      .cursor-glow {
+          cursor: pointer;
+          position: relative;
+      }
+
+      .cursor-glow::after {
+          content: '';
+          position: absolute;
+          width: 30px;
+          height: 30px;
+          background: radial-gradient(circle, rgba(56, 189, 248, 0.4) 0%, rgba(56, 189, 248, 0) 70%);
+          border-radius: 50%;
+          transform: translate(-50%, -50%);
+          pointer-events: none;
+          z-index: -1;
+      }
+
+      input[type="range"] {
+          -webkit-appearance: none;
+          width: 100%;
+          height: 6px;
+          background: #334155;
+          border-radius: 5px;
+          outline: none;
+      }
+
+      input[type="range"]::-webkit-slider-thumb {
+          -webkit-appearance: none;
+          width: 18px;
+          height: 18px;
+          background: linear-gradient(135deg, var(--neon-blue), var(--neon-purple));
+          border-radius: 50%;
+          cursor: pointer;
+          box-shadow: 0 0 10px rgba(56, 189, 248, 0.5);
+      }
+
+      .switch {
+          position: relative;
+          display: inline-block;
+          width: 50px;
+          height: 24px;
+      }
+
+      .switch input {
+          opacity: 0;
+          width: 0;
+          height: 0;
+      }
+
+      .slider {
+          position: absolute;
+          cursor: pointer;
+          top: 0;
+          left: 0;
+          right: 0;
+          bottom: 0;
+          background-color: #334155;
+          transition: .4s;
+          border-radius: 34px;
+      }
+
+      .slider:before {
+          position: absolute;
+          content: "";
+          height: 18px;
+          width: 18px;
+          left: 3px;
+          bottom: 3px;
+          background-color: white;
+          transition: .4s;
+          border-radius: 50%;
+      }
+
+      input:checked + .slider {
+          background: linear-gradient(135deg, var(--neon-blue), var(--neon-purple));
+      }
+
+      input:checked + .slider:before {
+          transform: translateX(26px);
+      }
+
+      .custom-checkbox {
+          position: relative;
+          padding-left: 30px;
+          cursor: pointer;
+          user-select: none;
+      }
+
+      .custom-checkbox input {
+          position: absolute;
+          opacity: 0;
+          cursor: pointer;
+          height: 0;
+          width: 0;
+      }
+
+      .checkmark {
+          position: absolute;
+          top: 0;
+          left: 0;
+          height: 20px;
+          width: 20px;
+          background-color: #334155;
+          border-radius: 4px;
+      }
+
+      .custom-checkbox:hover input ~ .checkmark {
+          background-color: #475569;
+      }
+
+      .custom-checkbox input:checked ~ .checkmark {
+          background: linear-gradient(135deg, var(--neon-blue), var(--neon-purple));
+      }
+
+      .checkmark:after {
+          content: "";
+          position: absolute;
+          display: none;
+      }
+
+      .custom-checkbox input:checked ~ .checkmark:after {
+          display: block;
+      }
+
+      .custom-checkbox .checkmark:after {
+          left: 7px;
+          top: 3px;
+          width: 6px;
+          height: 12px;
+          border: solid white;
+          border-width: 0 2px 2px 0;
+          transform: rotate(45deg);
+      }
+
+      .custom-radio {
+          position: relative;
+          padding-left: 30px;
+          cursor: pointer;
+          user-select: none;
+      }
+
+      .custom-radio input {
+          position: absolute;
+          opacity: 0;
+          cursor: pointer;
+          height: 0;
+          width: 0;
+      }
+
+      .radio-mark {
+          position: absolute;
+          top: 0;
+          left: 0;
+          height: 20px;
+          width: 20px;
+          background-color: #334155;
+          border-radius: 50%;
+      }
+
+      .custom-radio:hover input ~ .radio-mark {
+          background-color: #475569;
+      }
+
+      .custom-radio input:checked ~ .radio-mark {
+          background-color: #334155;
+          border: 2px solid transparent;
+          background-image: linear-gradient(#334155, #334155),
+                            linear-gradient(135deg, var(--neon-blue), var(--neon-purple));
+          background-origin: border-box;
+          background-clip: content-box, border-box;
+      }
+
+      .radio-mark:after {
+          content: "";
+          position: absolute;
+          display: none;
+      }
+
+      .custom-radio input:checked ~ .radio-mark:after {
+          display: block;
+      }
+
+      .custom-radio .radio-mark:after {
+          top: 5px;
+          left: 5px;
+          width: 8px;
+          height: 8px;
+          border-radius: 50%;
+          background: linear-gradient(135deg, var(--neon-blue), var(--neon-purple));
+      }
+
+      .particle {
+          position: absolute;
+          border-radius: 50%;
+          background: linear-gradient(135deg, var(--neon-blue), var(--neon-purple));
+          opacity: 0.3;
+          pointer-events: none;
+      }
+
+      .code-typing {
+          overflow: hidden;
+          border-right: 2px solid var(--neon-blue);
+          white-space: nowrap;
+          animation: typing 3.5s steps(40, end), blink-caret 0.75s step-end infinite;
+      }
+
+      @keyframes typing {
+          from { width: 0 }
+          to { width: 100% }
+      }
+
+      @keyframes blink-caret {
+          from, to { border-color: transparent }
+          50% { border-color: var(--neon-blue) }
+      }
+
+      .ripple {
+          position: absolute;
+          border-radius: 50%;
+          transform: scale(0);
+          animation: ripple 0.6s linear;
+          background-color: rgba(255, 255, 255, 0.2);
+      }
+
+      @keyframes ripple {
+          to {
+              transform: scale(4);
+              opacity: 0;
+          }
+      }
+    </style>
+  </head>
+  <body class="grid-bg min-h-screen">
+    <!-- Floating Elements -->
+    <div
+      class="fixed w-32 h-32 top-1/4 left-1/4 rounded-full bg-gradient-to-br from-blue-400/10 to-purple-500/10 blur-xl floating"
+      style="animation-delay: 0s;"
+    ></div>
+    <div
+      class="fixed w-40 h-40 bottom-1/3 right-1/3 rounded-full bg-gradient-to-br from-purple-500/10 to-blue-400/10 blur-xl floating"
+      style="animation-delay: 2s;"
+    ></div>
+    <div
+      class="fixed w-24 h-24 top-2/3 left-1/3 rounded-full bg-gradient-to-br from-blue-400/10 to-purple-500/10 blur-xl floating"
+      style="animation-delay: 4s;"
+    ></div>
+    <!-- Header -->
+    <header class="fixed top-0 left-0 right-0 z-50 glass-effect">
+      <div class="container mx-auto px-6 py-4">
+        <div class="flex justify-between items-center">
+          <a href="#" class="flex items-center">
+            <div
+              class="w-10 h-10 flex items-center justify-center mr-2 bg-gradient-to-br from-blue-400 to-purple-500 rounded-full glow"
+            >
+              <i class="ri-code-box-line text-white ri-lg"></i>
+            </div>
+            <span class="logo-text text-2xl">logo</span>
+          </a>
+
+          <nav class="hidden md:flex items-center space-x-8">
+            <a
+              href="#"
+              class="text-white hover:text-primary transition-colors duration-300 relative group"
+            >
+              Home
+              <span
+                class="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-blue-400 to-purple-500 group-hover:w-full transition-all duration-300"
+              ></span>
+            </a>
+            <a
+              href="#"
+              class="text-white hover:text-primary transition-colors duration-300 relative group"
+            >
+              How it Works
+              <span
+                class="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-blue-400 to-purple-500 group-hover:w-full transition-all duration-300"
+              ></span>
+            </a>
+            <a
+              href="#"
+              class="text-white hover:text-primary transition-colors duration-300 relative group"
+            >
+              Features
+              <span
+                class="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-blue-400 to-purple-500 group-hover:w-full transition-all duration-300"
+              ></span>
+            </a>
+            <a
+              href="#"
+              class="text-white hover:text-primary transition-colors duration-300 relative group"
+            >
+              Pricing
+              <span
+                class="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-blue-400 to-purple-500 group-hover:w-full transition-all duration-300"
+              ></span>
+            </a>
+            <div class="flex items-center space-x-4">
+              <a
+                href="#"
+                class="text-white hover:text-primary transition-colors duration-300"
+                >Login</a
+              >
+              <a
+                href="#"
+                class="px-4 py-2 !rounded-button bg-gradient-to-r from-blue-500 to-purple-500 text-white font-medium hover:shadow-lg hover:shadow-purple-500/25 transition-all duration-300 whitespace-nowrap"
+                >Sign Up</a
+              >
+            </div>
+          </nav>
+
+          <button
+            class="md:hidden w-10 h-10 flex items-center justify-center text-white"
+          >
+            <i class="ri-menu-line ri-lg"></i>
+          </button>
+        </div>
+      </div>
+    </header>
+    <!-- Hero Section -->
+    <section class="pt-32 pb-20 relative overflow-hidden">
+      <div class="container mx-auto px-6">
+        <div class="max-w-4xl mx-auto text-center mb-12">
+          <h1
+            class="futuristic-heading text-4xl md:text-6xl font-bold mb-6 glow-text bg-gradient-to-r from-blue-400 to-purple-500 bg-clip-text text-transparent"
+          >
+            Transform Text to Websites with AI
+          </h1>
+          <p class="text-lg md:text-xl text-gray-300 mb-8">
+            Describe your dream website in plain English and watch our AI build
+            it in real-time. No coding required, just your imagination.
+          </p>
+
+          <!-- AI Input Box -->
+          <div class="relative mb-6 glow-border group">
+            <div
+              class="absolute inset-0 bg-gradient-to-r from-blue-500/20 to-purple-500/20 rounded-lg blur opacity-75 group-hover:opacity-100 transition-opacity duration-300"
+            ></div>
+            <div
+              class="relative bg-gray-900 rounded-lg p-4 border border-gray-700"
+            >
+              <div class="flex items-start">
+                <textarea
+                  id="prompt-input"
+                  class="w-full bg-transparent border-none text-white placeholder-gray-500 focus:outline-none resize-none h-20"
+                  placeholder="Describe your website idea here..."
+                ></textarea>
+                <div class="flex flex-col space-y-2 ml-3">
+                  <button
+                    class="w-10 h-10 flex items-center justify-center text-gray-400 hover:text-white bg-gray-800 rounded-full transition-colors"
+                  >
+                    <i class="ri-mic-line ri-lg"></i>
+                  </button>
+                  <button
+                    class="w-10 h-10 flex items-center justify-center text-gray-400 hover:text-white bg-gray-800 rounded-full transition-colors"
+                  >
+                    <i class="ri-close-line ri-lg"></i>
+                  </button>
+                </div>
+              </div>
+              <div class="flex justify-between items-center mt-4">
+                <div class="flex items-center space-x-4">
+                  <label class="switch">
+                    <input type="checkbox" checked />
+                    <span class="slider"></span>
+                  </label>
+                  <span class="text-sm text-gray-400">Advanced Mode</span>
+                </div>
+                <button
+                  id="generate-btn"
+                  class="px-6 py-3 !rounded-button bg-gradient-to-r from-blue-500 to-purple-500 text-white font-medium hover:shadow-lg hover:shadow-purple-500/25 transition-all duration-300 whitespace-nowrap"
+                >
+                  Generate Website Now
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <div
+            class="flex flex-wrap justify-center gap-4 text-sm text-gray-400"
+          >
+            <div class="flex items-center">
+              <div class="w-6 h-6 flex items-center justify-center mr-2">
+                <i class="ri-flashlight-line text-blue-400"></i>
+              </div>
+              <span>Lightning fast generation</span>
+            </div>
+            <div class="flex items-center">
+              <div class="w-6 h-6 flex items-center justify-center mr-2">
+                <i class="ri-code-line text-blue-400"></i>
+              </div>
+              <span>Clean, optimized code</span>
+            </div>
+            <div class="flex items-center">
+              <div class="w-6 h-6 flex items-center justify-center mr-2">
+                <i class="ri-device-line text-blue-400"></i>
+              </div>
+              <span>Fully responsive design</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Preview Section -->
+    <section class="py-16 relative">
+      <div class="container mx-auto px-6">
+        <div class="grid md:grid-cols-2 gap-8">
+          <!-- Code Visualization -->
+          <div
+            class="bg-gray-900 rounded-lg p-6 border border-gray-800 h-[500px] overflow-hidden relative"
+          >
+            <div class="flex items-center justify-between mb-4">
+              <div class="flex space-x-2">
+                <div class="w-3 h-3 rounded-full bg-red-500"></div>
+                <div class="w-3 h-3 rounded-full bg-yellow-500"></div>
+                <div class="w-3 h-3 rounded-full bg-green-500"></div>
+              </div>
+              <div class="flex space-x-2">
+                <button
+                  class="px-3 py-1 !rounded-button bg-gray-800 text-xs text-gray-400 hover:bg-gray-700 transition-colors whitespace-nowrap"
+                >
+                  HTML
+                </button>
+                <button
+                  class="px-3 py-1 !rounded-button bg-gray-800 text-xs text-gray-400 hover:bg-gray-700 transition-colors whitespace-nowrap"
+                >
+                  CSS
+                </button>
+                <button
+                  class="px-3 py-1 !rounded-button bg-gray-800 text-xs text-gray-400 hover:bg-gray-700 transition-colors whitespace-nowrap"
+                >
+                  JS
+                </button>
+              </div>
+            </div>
+
+            <div
+              class="text-sm font-mono text-gray-300 overflow-y-auto h-[calc(100%-2rem)]"
+            >
+              <pre
+                class="code-typing"
+              ><span class="text-purple-400">&lt;!DOCTYPE html&gt;</span>
+<span class="text-purple-400">&lt;html lang="en"&gt;</span>
+<span class="text-purple-400">&lt;head&gt;</span>
+    <span class="text-purple-400">&lt;meta</span> <span class="text-blue-400">charset=</span><span class="text-green-400">"UTF-8"</span><span class="text-purple-400">&gt;</span>
+    <span class="text-purple-400">&lt;meta</span> <span class="text-blue-400">name=</span><span class="text-green-400">"viewport"</span> <span class="text-blue-400">content=</span><span class="text-green-400">"width=device-width, initial-scale=1.0"</span><span class="text-purple-400">&gt;</span>
+    <span class="text-purple-400">&lt;title&gt;</span>AI Generated Website<span class="text-purple-400">&lt;/title&gt;</span>
+    <span class="text-purple-400">&lt;style&gt;</span>
+    <span class="text-blue-400">:root</span> {
+        <span class="text-green-400">--primary-color</span>: <span class="text-orange-400">#38bdf8</span>;
+        <span class="text-green-400">--accent-color</span>: <span class="text-orange-400">#a855f7</span>;
+        <span class="text-green-400">--dark-bg</span>: <span class="text-orange-400">#0f172a</span>;
+    }
+    
+    <span class="text-blue-400">body</span> {
+        <span class="text-green-400">font-family</span>: <span class="text-orange-400">'Inter', sans-serif</span>;
+        <span class="text-green-400">background-color</span>: <span class="text-orange-400">var(--dark-bg)</span>;
+        <span class="text-green-400">color</span>: <span class="text-orange-400">#f8fafc</span>;
+        <span class="text-green-400">margin</span>: <span class="text-orange-400">0</span>;
+        <span class="text-green-400">padding</span>: <span class="text-orange-400">0</span>;
+    }
+    
+    <span class="text-blue-400">.container</span> {
+        <span class="text-green-400">max-width</span>: <span class="text-orange-400">1200px</span>;
+        <span class="text-green-400">margin</span>: <span class="text-orange-400">0 auto</span>;
+        <span class="text-green-400">padding</span>: <span class="text-orange-400">0 2rem</span>;
+    }
+    
+    <span class="text-blue-400">.hero</span> {
+        <span class="text-green-400">display</span>: <span class="text-orange-400">flex</span>;
+        <span class="text-green-400">align-items</span>: <span class="text-orange-400">center</span>;
+        <span class="text-green-400">justify-content</span>: <span class="text-orange-400">center</span>;
+        <span class="text-green-400">min-height</span>: <span class="text-orange-400">100vh</span>;
+        <span class="text-green-400">position</span>: <span class="text-orange-400">relative</span>;
+        <span class="text-green-400">overflow</span>: <span class="text-orange-400">hidden</span>;
+    }
+    <span class="text-purple-400">&lt;/style&gt;</span>
+<span class="text-purple-400">&lt;/head&gt;</span>
+<span class="text-purple-400">&lt;body&gt;</span>
+    <span class="text-purple-400">&lt;header</span> <span class="text-blue-400">class=</span><span class="text-green-400">"header"</span><span class="text-purple-400">&gt;</span>
+        <span class="text-purple-400">&lt;div</span> <span class="text-blue-400">class=</span><span class="text-green-400">"container"</span><span class="text-purple-400">&gt;</span>
+            <span class="text-purple-400">&lt;nav</span> <span class="text-blue-400">class=</span><span class="text-green-400">"nav"</span><span class="text-purple-400">&gt;</span>
+                <span class="text-purple-400">&lt;div</span> <span class="text-blue-400">class=</span><span class="text-green-400">"logo"</span><span class="text-purple-400">&gt;</span>Your Brand<span class="text-purple-400">&lt;/div&gt;</span>
+                <span class="text-purple-400">&lt;ul</span> <span class="text-blue-400">class=</span><span class="text-green-400">"menu"</span><span class="text-purple-400">&gt;</span>
+                    <span class="text-purple-400">&lt;li&gt;&lt;a</span> <span class="text-blue-400">href=</span><span class="text-green-400">"#"</span><span class="text-purple-400">&gt;</span>Home<span class="text-purple-400">&lt;/a&gt;&lt;/li&gt;</span>
+                    <span class="text-purple-400">&lt;li&gt;&lt;a</span> <span class="text-blue-400">href=</span><span class="text-green-400">"#"</span><span class="text-purple-400">&gt;</span>About<span class="text-purple-400">&lt;/a&gt;&lt;/li&gt;</span>
+                    <span class="text-purple-400">&lt;li&gt;&lt;a</span> <span class="text-blue-400">href=</span><span class="text-green-400">"#"</span><span class="text-purple-400">&gt;</span>Services<span class="text-purple-400">&lt;/a&gt;&lt;/li&gt;</span>
+                    <span class="text-purple-400">&lt;li&gt;&lt;a</span> <span class="text-blue-400">href=</span><span class="text-green-400">"#"</span><span class="text-purple-400">&gt;</span>Contact<span class="text-purple-400">&lt;/a&gt;&lt;/li&gt;</span>
+                <span class="text-purple-400">&lt;/ul&gt;</span>
+            <span class="text-purple-400">&lt;/nav&gt;</span>
+        <span class="text-purple-400">&lt;/div&gt;</span>
+    <span class="text-purple-400">&lt;/header&gt;</span>
+    
+    <span class="text-purple-400">&lt;section</span> <span class="text-blue-400">class=</span><span class="text-green-400">"hero"</span><span class="text-purple-400">&gt;</span>
+        <span class="text-purple-400">&lt;div</span> <span class="text-blue-400">class=</span><span class="text-green-400">"container"</span><span class="text-purple-400">&gt;</span>
+            <span class="text-purple-400">&lt;div</span> <span class="text-blue-400">class=</span><span class="text-green-400">"hero-content"</span><span class="text-purple-400">&gt;</span>
+                <span class="text-purple-400">&lt;h1&gt;</span>Welcome to Your AI-Generated Website<span class="text-purple-400">&lt;/h1&gt;</span>
+                <span class="text-purple-400">&lt;p&gt;</span>This stunning website was created by AI based on your prompt.<span class="text-purple-400">&lt;/p&gt;</span>
+                <span class="text-purple-400">&lt;button</span> <span class="text-blue-400">class=</span><span class="text-green-400">"cta-button"</span><span class="text-purple-400">&gt;</span>Get Started<span class="text-purple-400">&lt;/button&gt;</span>
+            <span class="text-purple-400">&lt;/div&gt;</span>
+        <span class="text-purple-400">&lt;/div&gt;</span>
+    <span class="text-purple-400">&lt;/section&gt;</span></pre>
+            </div>
+
+            <!-- Floating particles in the background -->
+            <div class="absolute inset-0 pointer-events-none">
+              <div
+                class="particle"
+                style="width: 4px; height: 4px; top: 20%; left: 30%; animation: float 8s ease-in-out infinite;"
+              ></div>
+              <div
+                class="particle"
+                style="width: 6px; height: 6px; top: 40%; left: 70%; animation: float 10s ease-in-out infinite;"
+              ></div>
+              <div
+                class="particle"
+                style="width: 3px; height: 3px; top: 70%; left: 20%; animation: float 7s ease-in-out infinite;"
+              ></div>
+              <div
+                class="particle"
+                style="width: 5px; height: 5px; top: 80%; left: 80%; animation: float 9s ease-in-out infinite;"
+              ></div>
+            </div>
+          </div>
+
+          <!-- Live Preview -->
+          <div
+            class="bg-gray-900 rounded-lg p-6 border border-gray-800 h-[500px] relative"
+          >
+            <div class="flex items-center justify-between mb-4">
+              <div class="text-sm text-gray-400">Live Preview</div>
+              <div class="flex space-x-2">
+                <button
+                  class="px-3 py-1 !rounded-button bg-gray-800 text-xs text-gray-400 hover:bg-gray-700 transition-colors flex items-center whitespace-nowrap"
+                >
+                  <i class="ri-smartphone-line mr-1"></i> Mobile
+                </button>
+                <button
+                  class="px-3 py-1 !rounded-button bg-gray-800 text-xs text-gray-400 hover:bg-gray-700 transition-colors flex items-center whitespace-nowrap"
+                >
+                  <i class="ri-tablet-line mr-1"></i> Tablet
+                </button>
+                <button
+                  class="px-3 py-1 !rounded-button bg-gradient-to-r from-blue-500 to-purple-500 text-xs text-white flex items-center whitespace-nowrap"
+                >
+                  <i class="ri-computer-line mr-1"></i> Desktop
+                </button>
+              </div>
+            </div>
+
+            <div
+              class="bg-white rounded border border-gray-700 h-[calc(100%-2rem)] overflow-hidden relative"
+            >
+              <div class="absolute inset-0 flex items-center justify-center">
+                <div class="text-center">
+                  <div
+                    class="w-16 h-16 mx-auto mb-4 rounded-full bg-gradient-to-r from-blue-500 to-purple-500 flex items-center justify-center"
+                  >
+                    <i class="ri-code-line text-white ri-2x"></i>
+                  </div>
+                  <h3 class="text-gray-800 font-medium mb-2">
+                    Website Preview
+                  </h3>
+                  <p class="text-gray-600 text-sm mb-4">
+                    Enter a prompt and click generate to see your website come
+                    to life
+                  </p>
+                  <div
+                    class="w-32 h-2 mx-auto bg-gray-200 rounded-full overflow-hidden"
+                  >
+                    <div
+                      class="w-0 h-full bg-gradient-to-r from-blue-500 to-purple-500"
+                      id="progress-bar"
+                    ></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="py-16 relative">
+      <div class="container mx-auto px-6">
+        <div class="text-center mb-16">
+          <h2
+            class="futuristic-heading text-3xl md:text-4xl font-bold mb-4 bg-gradient-to-r from-blue-400 to-purple-500 bg-clip-text text-transparent"
+          >
+            Advanced AI-Powered Features
+          </h2>
+          <p class="text-gray-400 max-w-2xl mx-auto">
+            Our cutting-edge technology transforms your text descriptions into
+            fully functional websites with these powerful features
+          </p>
+        </div>
+
+        <div class="grid md:grid-cols-3 gap-8">
+          <!-- Feature 1 -->
+          <div
+            class="bg-gray-900/50 backdrop-blur-sm p-6 rounded-lg border border-gray-800 hover:border-purple-500/30 transition-colors group"
+          >
+            <div
+              class="w-14 h-14 flex items-center justify-center rounded-lg bg-gradient-to-br from-blue-500/20 to-purple-500/20 mb-6 group-hover:from-blue-500/30 group-hover:to-purple-500/30 transition-colors"
+            >
+              <i class="ri-code-s-slash-line text-blue-400 ri-xl"></i>
+            </div>
+            <h3 class="text-xl font-semibold mb-3 text-white">
+              Code Generation
+            </h3>
+            <p class="text-gray-400">
+              Instantly convert your text descriptions into clean, optimized
+              HTML, CSS, and JavaScript code ready for deployment.
+            </p>
+          </div>
+
+          <!-- Feature 2 -->
+          <div
+            class="bg-gray-900/50 backdrop-blur-sm p-6 rounded-lg border border-gray-800 hover:border-purple-500/30 transition-colors group"
+          >
+            <div
+              class="w-14 h-14 flex items-center justify-center rounded-lg bg-gradient-to-br from-blue-500/20 to-purple-500/20 mb-6 group-hover:from-blue-500/30 group-hover:to-purple-500/30 transition-colors"
+            >
+              <i class="ri-layout-line text-blue-400 ri-xl"></i>
+            </div>
+            <h3 class="text-xl font-semibold mb-3 text-white">
+              Responsive Design
+            </h3>
+            <p class="text-gray-400">
+              Every generated website is fully responsive and looks perfect on
+              all devices, from mobile phones to desktop computers.
+            </p>
+          </div>
+
+          <!-- Feature 3 -->
+          <div
+            class="bg-gray-900/50 backdrop-blur-sm p-6 rounded-lg border border-gray-800 hover:border-purple-500/30 transition-colors group"
+          >
+            <div
+              class="w-14 h-14 flex items-center justify-center rounded-lg bg-gradient-to-br from-blue-500/20 to-purple-500/20 mb-6 group-hover:from-blue-500/30 group-hover:to-purple-500/30 transition-colors"
+            >
+              <i class="ri-palette-line text-blue-400 ri-xl"></i>
+            </div>
+            <h3 class="text-xl font-semibold mb-3 text-white">
+              Custom Styling
+            </h3>
+            <p class="text-gray-400">
+              Specify your color preferences, typography, and design elements in
+              your prompt for a truly personalized website.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- How It Works -->
+    <section class="py-16 relative">
+      <div class="container mx-auto px-6">
+        <div class="text-center mb-16">
+          <h2
+            class="futuristic-heading text-3xl md:text-4xl font-bold mb-4 bg-gradient-to-r from-blue-400 to-purple-500 bg-clip-text text-transparent"
+          >
+            How It Works
+          </h2>
+          <p class="text-gray-400 max-w-2xl mx-auto">
+            Creating your website with AI is simple, fast, and requires no
+            technical knowledge
+          </p>
+        </div>
+
+        <div class="max-w-4xl mx-auto">
+          <div class="relative">
+            <!-- Timeline line -->
+            <div
+              class="absolute left-0 md:left-1/2 top-0 bottom-0 w-px bg-gradient-to-b from-blue-500 to-purple-500 transform md:translate-x-[-0.5px]"
+            ></div>
+
+            <!-- Step 1 -->
+            <div
+              class="relative flex flex-col md:flex-row md:items-center mb-12"
+            >
+              <div class="md:w-1/2 md:pr-12 md:text-right order-2 md:order-1">
+                <h3 class="text-xl font-semibold mb-2 text-white">
+                  Describe Your Vision
+                </h3>
+                <p class="text-gray-400">
+                  Enter a detailed description of your website, including
+                  purpose, style, content, and any specific features you want.
+                </p>
+              </div>
+              <div
+                class="flex items-center justify-center mb-4 md:mb-0 order-1 md:order-2"
+              >
+                <div
+                  class="w-10 h-10 rounded-full bg-gradient-to-br from-blue-500 to-purple-500 flex items-center justify-center z-10 glow"
+                >
+                  <span class="text-white font-semibold">1</span>
+                </div>
+              </div>
+              <div class="md:w-1/2 md:pl-12 hidden md:block order-3"></div>
+            </div>
+
+            <!-- Step 2 -->
+            <div
+              class="relative flex flex-col md:flex-row md:items-center mb-12"
+            >
+              <div class="md:w-1/2 md:pr-12 hidden md:block"></div>
+              <div class="flex items-center justify-center mb-4 md:mb-0">
+                <div
+                  class="w-10 h-10 rounded-full bg-gradient-to-br from-blue-500 to-purple-500 flex items-center justify-center z-10 glow"
+                >
+                  <span class="text-white font-semibold">2</span>
+                </div>
+              </div>
+              <div class="md:w-1/2 md:pl-12">
+                <h3 class="text-xl font-semibold mb-2 text-white">
+                  AI Generates Code
+                </h3>
+                <p class="text-gray-400">
+                  Our advanced AI analyzes your description and generates clean,
+                  optimized code for your website in seconds.
+                </p>
+              </div>
+            </div>
+
+            <!-- Step 3 -->
+            <div
+              class="relative flex flex-col md:flex-row md:items-center mb-12"
+            >
+              <div class="md:w-1/2 md:pr-12 md:text-right order-2 md:order-1">
+                <h3 class="text-xl font-semibold mb-2 text-white">
+                  Preview & Customize
+                </h3>
+                <p class="text-gray-400">
+                  See your website come to life in real-time. Make adjustments
+                  to your prompt to refine the design until it's perfect.
+                </p>
+              </div>
+              <div
+                class="flex items-center justify-center mb-4 md:mb-0 order-1 md:order-2"
+              >
+                <div
+                  class="w-10 h-10 rounded-full bg-gradient-to-br from-blue-500 to-purple-500 flex items-center justify-center z-10 glow"
+                >
+                  <span class="text-white font-semibold">3</span>
+                </div>
+              </div>
+              <div class="md:w-1/2 md:pl-12 hidden md:block order-3"></div>
+            </div>
+
+            <!-- Step 4 -->
+            <div class="relative flex flex-col md:flex-row md:items-center">
+              <div class="md:w-1/2 md:pr-12 hidden md:block"></div>
+              <div class="flex items-center justify-center mb-4 md:mb-0">
+                <div
+                  class="w-10 h-10 rounded-full bg-gradient-to-br from-blue-500 to-purple-500 flex items-center justify-center z-10 glow"
+                >
+                  <span class="text-white font-semibold">4</span>
+                </div>
+              </div>
+              <div class="md:w-1/2 md:pl-12">
+                <h3 class="text-xl font-semibold mb-2 text-white">
+                  Deploy Your Website
+                </h3>
+                <p class="text-gray-400">
+                  Download your code or deploy directly to our hosting platform
+                  with one click. Your website is ready to share with the world.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Pricing Section -->
+    <section class="py-16 relative">
+      <div class="container mx-auto px-6">
+        <div class="text-center mb-16">
+          <h2
+            class="futuristic-heading text-3xl md:text-4xl font-bold mb-4 bg-gradient-to-r from-blue-400 to-purple-500 bg-clip-text text-transparent"
+          >
+            Choose Your Plan
+          </h2>
+          <p class="text-gray-400 max-w-2xl mx-auto">
+            Select the perfect plan for your needs, from casual creators to
+            professional developers
+          </p>
+        </div>
+
+        <div class="grid md:grid-cols-3 gap-8 max-w-5xl mx-auto">
+          <!-- Free Plan -->
+          <div
+            class="bg-gray-900/50 backdrop-blur-sm rounded-lg border border-gray-800 overflow-hidden transition-all duration-300 hover:translate-y-[-5px] hover:border-blue-500/30"
+          >
+            <div class="p-6">
+              <h3 class="text-xl font-semibold mb-2 text-white">Free</h3>
+              <div class="flex items-end mb-4">
+                <span class="text-3xl font-bold text-white">$0</span>
+                <span class="text-gray-400 ml-1">/month</span>
+              </div>
+              <p class="text-gray-400 mb-6">
+                Perfect for trying out our platform
+              </p>
+
+              <ul class="space-y-3 mb-6">
+                <li class="flex items-start">
+                  <div
+                    class="w-5 h-5 flex items-center justify-center mr-2 mt-0.5 text-blue-400"
+                  >
+                    <i class="ri-check-line"></i>
+                  </div>
+                  <span class="text-gray-300"
+                    >5 website generations per month</span
+                  >
+                </li>
+                <li class="flex items-start">
+                  <div
+                    class="w-5 h-5 flex items-center justify-center mr-2 mt-0.5 text-blue-400"
+                  >
+                    <i class="ri-check-line"></i>
+                  </div>
+                  <span class="text-gray-300">Basic customization options</span>
+                </li>
+                <li class="flex items-start">
+                  <div
+                    class="w-5 h-5 flex items-center justify-center mr-2 mt-0.5 text-blue-400"
+                  >
+                    <i class="ri-check-line"></i>
+                  </div>
+                  <span class="text-gray-300">Download HTML/CSS/JS</span>
+                </li>
+                <li class="flex items-start opacity-50">
+                  <div
+                    class="w-5 h-5 flex items-center justify-center mr-2 mt-0.5 text-gray-500"
+                  >
+                    <i class="ri-close-line"></i>
+                  </div>
+                  <span class="text-gray-500">No watermark</span>
+                </li>
+                <li class="flex items-start opacity-50">
+                  <div
+                    class="w-5 h-5 flex items-center justify-center mr-2 mt-0.5 text-gray-500"
+                  >
+                    <i class="ri-close-line"></i>
+                  </div>
+                  <span class="text-gray-500">Priority support</span>
+                </li>
+              </ul>
+            </div>
+
+            <div class="px-6 pb-6">
+              <button
+                class="w-full py-3 !rounded-button bg-gray-800 text-white font-medium hover:bg-gray-700 transition-colors whitespace-nowrap"
+              >
+                Get Started
+              </button>
+            </div>
+          </div>
+
+          <!-- Pro Plan -->
+          <div
+            class="bg-gray-900/50 backdrop-blur-sm rounded-lg border-2 border-blue-500 overflow-hidden transform scale-105 shadow-lg shadow-blue-500/20 relative z-10"
+          >
+            <div
+              class="absolute top-0 left-0 right-0 bg-gradient-to-r from-blue-500 to-purple-500 text-white text-xs font-semibold py-1 text-center"
+            >
+              MOST POPULAR
+            </div>
+
+            <div class="p-6 pt-10">
+              <h3 class="text-xl font-semibold mb-2 text-white">Pro</h3>
+              <div class="flex items-end mb-4">
+                <span class="text-3xl font-bold text-white">$29</span>
+                <span class="text-gray-400 ml-1">/month</span>
+              </div>
+              <p class="text-gray-400 mb-6">
+                Perfect for professionals and small teams
+              </p>
+
+              <ul class="space-y-3 mb-6">
+                <li class="flex items-start">
+                  <div
+                    class="w-5 h-5 flex items-center justify-center mr-2 mt-0.5 text-blue-400"
+                  >
+                    <i class="ri-check-line"></i>
+                  </div>
+                  <span class="text-gray-300"
+                    >Unlimited website generations</span
+                  >
+                </li>
+                <li class="flex items-start">
+                  <div
+                    class="w-5 h-5 flex items-center justify-center mr-2 mt-0.5 text-blue-400"
+                  >
+                    <i class="ri-check-line"></i>
+                  </div>
+                  <span class="text-gray-300"
+                    >Advanced customization options</span
+                  >
+                </li>
+                <li class="flex items-start">
+                  <div
+                    class="w-5 h-5 flex items-center justify-center mr-2 mt-0.5 text-blue-400"
+                  >
+                    <i class="ri-check-line"></i>
+                  </div>
+                  <span class="text-gray-300">Download HTML/CSS/JS</span>
+                </li>
+                <li class="flex items-start">
+                  <div
+                    class="w-5 h-5 flex items-center justify-center mr-2 mt-0.5 text-blue-400"
+                  >
+                    <i class="ri-check-line"></i>
+                  </div>
+                  <span class="text-gray-300">No watermark</span>
+                </li>
+                <li class="flex items-start">
+                  <div
+                    class="w-5 h-5 flex items-center justify-center mr-2 mt-0.5 text-blue-400"
+                  >
+                    <i class="ri-check-line"></i>
+                  </div>
+                  <span class="text-gray-300">Priority support</span>
+                </li>
+              </ul>
+            </div>
+
+            <div class="px-6 pb-6">
+              <button
+                class="w-full py-3 !rounded-button bg-gradient-to-r from-blue-500 to-purple-500 text-white font-medium hover:shadow-lg hover:shadow-purple-500/25 transition-all duration-300 whitespace-nowrap"
+              >
+                Get Started
+              </button>
+            </div>
+          </div>
+
+          <!-- Enterprise Plan -->
+          <div
+            class="bg-gray-900/50 backdrop-blur-sm rounded-lg border border-gray-800 overflow-hidden transition-all duration-300 hover:translate-y-[-5px] hover:border-purple-500/30"
+          >
+            <div class="p-6">
+              <h3 class="text-xl font-semibold mb-2 text-white">Enterprise</h3>
+              <div class="flex items-end mb-4">
+                <span class="text-3xl font-bold text-white">$99</span>
+                <span class="text-gray-400 ml-1">/month</span>
+              </div>
+              <p class="text-gray-400 mb-6">For large teams and businesses</p>
+
+              <ul class="space-y-3 mb-6">
+                <li class="flex items-start">
+                  <div
+                    class="w-5 h-5 flex items-center justify-center mr-2 mt-0.5 text-blue-400"
+                  >
+                    <i class="ri-check-line"></i>
+                  </div>
+                  <span class="text-gray-300">Everything in Pro plan</span>
+                </li>
+                <li class="flex items-start">
+                  <div
+                    class="w-5 h-5 flex items-center justify-center mr-2 mt-0.5 text-blue-400"
+                  >
+                    <i class="ri-check-line"></i>
+                  </div>
+                  <span class="text-gray-300">API access</span>
+                </li>
+                <li class="flex items-start">
+                  <div
+                    class="w-5 h-5 flex items-center justify-center mr-2 mt-0.5 text-blue-400"
+                  >
+                    <i class="ri-check-line"></i>
+                  </div>
+                  <span class="text-gray-300">Custom branding</span>
+                </li>
+                <li class="flex items-start">
+                  <div
+                    class="w-5 h-5 flex items-center justify-center mr-2 mt-0.5 text-blue-400"
+                  >
+                    <i class="ri-check-line"></i>
+                  </div>
+                  <span class="text-gray-300">Dedicated account manager</span>
+                </li>
+                <li class="flex items-start">
+                  <div
+                    class="w-5 h-5 flex items-center justify-center mr-2 mt-0.5 text-blue-400"
+                  >
+                    <i class="ri-check-line"></i>
+                  </div>
+                  <span class="text-gray-300">24/7 premium support</span>
+                </li>
+              </ul>
+            </div>
+
+            <div class="px-6 pb-6">
+              <button
+                class="w-full py-3 !rounded-button bg-gray-800 text-white font-medium hover:bg-gray-700 transition-colors whitespace-nowrap"
+              >
+                Contact Sales
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Testimonials -->
+    <section class="py-16 relative">
+      <div class="container mx-auto px-6">
+        <div class="text-center mb-16">
+          <h2
+            class="futuristic-heading text-3xl md:text-4xl font-bold mb-4 bg-gradient-to-r from-blue-400 to-purple-500 bg-clip-text text-transparent"
+          >
+            What Our Users Say
+          </h2>
+          <p class="text-gray-400 max-w-2xl mx-auto">
+            Join thousands of satisfied customers who have transformed their
+            ideas into stunning websites
+          </p>
+        </div>
+
+        <div class="grid md:grid-cols-3 gap-8">
+          <!-- Testimonial 1 -->
+          <div
+            class="bg-gray-900/50 backdrop-blur-sm p-6 rounded-lg border border-gray-800"
+          >
+            <div class="flex items-center mb-4">
+              <div class="text-yellow-400 flex">
+                <i class="ri-star-fill"></i>
+                <i class="ri-star-fill"></i>
+                <i class="ri-star-fill"></i>
+                <i class="ri-star-fill"></i>
+                <i class="ri-star-fill"></i>
+              </div>
+            </div>
+            <p class="text-gray-300 mb-6">
+              "I was blown away by how quickly the AI understood my vision and
+              turned it into a beautiful website. What would have taken me weeks
+              took just minutes!"
+            </p>
+            <div class="flex items-center">
+              <div
+                class="w-12 h-12 rounded-full bg-gradient-to-br from-blue-500 to-purple-500 flex items-center justify-center text-white font-medium text-lg"
+              >
+                JD
+              </div>
+              <div class="ml-4">
+                <h4 class="text-white font-medium">James Davidson</h4>
+                <p class="text-gray-400 text-sm">Startup Founder</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Testimonial 2 -->
+          <div
+            class="bg-gray-900/50 backdrop-blur-sm p-6 rounded-lg border border-gray-800"
+          >
+            <div class="flex items-center mb-4">
+              <div class="text-yellow-400 flex">
+                <i class="ri-star-fill"></i>
+                <i class="ri-star-fill"></i>
+                <i class="ri-star-fill"></i>
+                <i class="ri-star-fill"></i>
+                <i class="ri-star-fill"></i>
+              </div>
+            </div>
+            <p class="text-gray-300 mb-6">
+              "As a designer with no coding skills, this tool has been a
+              game-changer. I can now bring my designs to life without needing
+              to hire a developer."
+            </p>
+            <div class="flex items-center">
+              <div
+                class="w-12 h-12 rounded-full bg-gradient-to-br from-blue-500 to-purple-500 flex items-center justify-center text-white font-medium text-lg"
+              >
+                SR
+              </div>
+              <div class="ml-4">
+                <h4 class="text-white font-medium">Sophia Rodriguez</h4>
+                <p class="text-gray-400 text-sm">UX Designer</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Testimonial 3 -->
+          <div
+            class="bg-gray-900/50 backdrop-blur-sm p-6 rounded-lg border border-gray-800"
+          >
+            <div class="flex items-center mb-4">
+              <div class="text-yellow-400 flex">
+                <i class="ri-star-fill"></i>
+                <i class="ri-star-fill"></i>
+                <i class="ri-star-fill"></i>
+                <i class="ri-star-fill"></i>
+                <i class="ri-star-half-fill"></i>
+              </div>
+            </div>
+            <p class="text-gray-300 mb-6">
+              "The code quality is impressive. As a developer, I appreciate how
+              clean and well-structured the generated code is. It saves me hours
+              of work."
+            </p>
+            <div class="flex items-center">
+              <div
+                class="w-12 h-12 rounded-full bg-gradient-to-br from-blue-500 to-purple-500 flex items-center justify-center text-white font-medium text-lg"
+              >
+                MK
+              </div>
+              <div class="ml-4">
+                <h4 class="text-white font-medium">Michael Kim</h4>
+                <p class="text-gray-400 text-sm">Frontend Developer</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="py-20 relative">
+      <div
+        class="absolute inset-0 bg-gradient-to-br from-blue-500/10 to-purple-500/10"
+      ></div>
+      <div class="container mx-auto px-6 relative z-10">
+        <div class="max-w-4xl mx-auto text-center">
+          <h2
+            class="futuristic-heading text-3xl md:text-5xl font-bold mb-6 glow-text"
+          >
+            Ready to Build Your Dream Website?
+          </h2>
+          <p class="text-xl text-gray-300 mb-8">
+            Join thousands of creators who are building the web of tomorrow,
+            today.
+          </p>
+          <div class="flex flex-col sm:flex-row justify-center gap-4">
+            <button
+              class="px-8 py-4 !rounded-button bg-gradient-to-r from-blue-500 to-purple-500 text-white font-medium text-lg hover:shadow-lg hover:shadow-purple-500/25 transition-all duration-300 whitespace-nowrap"
+            >
+              Generate Website Now
+            </button>
+            <button
+              class="px-8 py-4 !rounded-button bg-gray-800 text-white font-medium text-lg hover:bg-gray-700 transition-colors whitespace-nowrap"
+            >
+              View Examples
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- Footer -->
+    <footer class="py-12 bg-gray-900">
+      <div class="container mx-auto px-6">
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-12">
+          <div>
+            <a href="#" class="flex items-center mb-6">
+              <div
+                class="w-10 h-10 flex items-center justify-center mr-2 bg-gradient-to-br from-blue-400 to-purple-500 rounded-full"
+              >
+                <i class="ri-code-box-line text-white ri-lg"></i>
+              </div>
+              <span class="logo-text text-2xl">logo</span>
+            </a>
+            <p class="text-gray-400 mb-6">
+              Transforming ideas into websites with the power of AI. No coding
+              required.
+            </p>
+            <div class="flex space-x-4">
+              <a
+                href="#"
+                class="w-10 h-10 flex items-center justify-center rounded-full bg-gray-800 text-gray-400 hover:bg-gray-700 hover:text-white transition-colors"
+              >
+                <i class="ri-twitter-x-line"></i>
+              </a>
+              <a
+                href="#"
+                class="w-10 h-10 flex items-center justify-center rounded-full bg-gray-800 text-gray-400 hover:bg-gray-700 hover:text-white transition-colors"
+              >
+                <i class="ri-facebook-fill"></i>
+              </a>
+              <a
+                href="#"
+                class="w-10 h-10 flex items-center justify-center rounded-full bg-gray-800 text-gray-400 hover:bg-gray-700 hover:text-white transition-colors"
+              >
+                <i class="ri-instagram-line"></i>
+              </a>
+              <a
+                href="#"
+                class="w-10 h-10 flex items-center justify-center rounded-full bg-gray-800 text-gray-400 hover:bg-gray-700 hover:text-white transition-colors"
+              >
+                <i class="ri-github-fill"></i>
+              </a>
+            </div>
+          </div>
+
+          <div>
+            <h4 class="text-white font-semibold mb-6">Product</h4>
+            <ul class="space-y-4 text-gray-400">
+              <li>
+                <a href="#" class="hover:text-white transition-colors"
+                  >Features</a
+                >
+              </li>
+              <li>
+                <a href="#" class="hover:text-white transition-colors"
+                  >Pricing</a
+                >
+              </li>
+              <li>
+                <a href="#" class="hover:text-white transition-colors"
+                  >Examples</a
+                >
+              </li>
+              <li>
+                <a href="#" class="hover:text-white transition-colors"
+                  >Documentation</a
+                >
+              </li>
+              <li>
+                <a href="#" class="hover:text-white transition-colors">API</a>
+              </li>
+            </ul>
+          </div>
+
+          <div>
+            <h4 class="text-white font-semibold mb-6">Company</h4>
+            <ul class="space-y-4 text-gray-400">
+              <li>
+                <a href="#" class="hover:text-white transition-colors"
+                  >About Us</a
+                >
+              </li>
+              <li>
+                <a href="#" class="hover:text-white transition-colors">Blog</a>
+              </li>
+              <li>
+                <a href="#" class="hover:text-white transition-colors"
+                  >Careers</a
+                >
+              </li>
+              <li>
+                <a href="#" class="hover:text-white transition-colors">Press</a>
+              </li>
+              <li>
+                <a href="#" class="hover:text-white transition-colors"
+                  >Contact</a
+                >
+              </li>
+            </ul>
+          </div>
+
+          <div>
+            <h4 class="text-white font-semibold mb-6">Stay Updated</h4>
+            <p class="text-gray-400 mb-4">
+              Subscribe to our newsletter for the latest updates and features.
+            </p>
+            <div class="flex">
+              <input
+                type="email"
+                placeholder="Your email address"
+                class="bg-gray-800 border-none text-white px-4 py-2 rounded-l-lg w-full focus:outline-none focus:ring-2 focus:ring-blue-500"
+              />
+              <button
+                class="bg-gradient-to-r from-blue-500 to-purple-500 text-white px-4 py-2 rounded-r-lg hover:shadow-lg hover:shadow-purple-500/25 transition-all duration-300 whitespace-nowrap"
+              >
+                Subscribe
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <div
+          class="pt-8 border-t border-gray-800 flex flex-col md:flex-row justify-between items-center"
+        >
+          <p class="text-gray-500 text-sm mb-4 md:mb-0">
+            © 2025 AI Website Generator. All rights reserved.
+          </p>
+          <div class="flex space-x-6 text-sm text-gray-500">
+            <a href="#" class="hover:text-white transition-colors"
+              >Terms of Service</a
+            >
+            <a href="#" class="hover:text-white transition-colors"
+              >Privacy Policy</a
+            >
+            <a href="#" class="hover:text-white transition-colors"
+              >Cookie Policy</a
+            >
+          </div>
+        </div>
+      </div>
+    </footer>
+
+    <script id="particleEffects">
+      document.addEventListener("DOMContentLoaded", function () {
+        const body = document.querySelector("body");
+
+        body.addEventListener("mousemove", function (e) {
+          if (Math.random() > 0.92) {
+            const particle = document.createElement("div");
+            particle.className = "particle";
+
+            const size = Math.random() * 5 + 3;
+            particle.style.width = `${size}px`;
+            particle.style.height = `${size}px`;
+
+            particle.style.left = `${e.clientX}px`;
+            particle.style.top = `${e.clientY}px`;
+
+            body.appendChild(particle);
+
+            setTimeout(() => {
+              particle.style.transform = `translate(${(Math.random() - 0.5) * 100}px, ${(Math.random() - 0.5) * 100}px)`;
+              particle.style.opacity = "0";
+
+              setTimeout(() => {
+                particle.remove();
+              }, 1000);
+            }, 10);
+          }
+        });
+      });
+    </script>
+
+    <script id="buttonRippleEffect">
+      document.addEventListener("DOMContentLoaded", function () {
+        const buttons = document.querySelectorAll("button");
+
+        buttons.forEach((button) => {
+          button.addEventListener("click", function (e) {
+            const rect = button.getBoundingClientRect();
+            const x = e.clientX - rect.left;
+            const y = e.clientY - rect.top;
+
+            const ripple = document.createElement("span");
+            ripple.className = "ripple";
+            ripple.style.left = `${x}px`;
+            ripple.style.top = `${y}px`;
+
+            button.appendChild(ripple);
+
+            setTimeout(() => {
+              ripple.remove();
+            }, 600);
+          });
+        });
+      });
+    </script>
+    <script id="progressBarAnimation">
+      document.addEventListener("DOMContentLoaded", function () {
+        const generateBtn = document.getElementById("generate-btn");
+        const progressBar = document.getElementById("progress-bar");
+
+        generateBtn.addEventListener("click", function () {
+          const promptInput = document.getElementById("prompt-input");
+
+          if (promptInput.value.trim() !== "") {
+            // Animate progress bar
+            progressBar.style.transition = "width 3s ease-in-out";
+            progressBar.style.width = "100%";
+
+            // Reset after animation completes
+            setTimeout(() => {
+              progressBar.style.transition = "none";
+              progressBar.style.width = "0";
+
+              setTimeout(() => {
+                progressBar.style.transition = "width 3s ease-in-out";
+              }, 100);
+            }, 3000);
+          }
+        });
+      });
+    </script>
+
+    <script id="typingAnimation">
+      document.addEventListener("DOMContentLoaded", function () {
+        const promptInput = document.getElementById("prompt-input");
+        const placeholderTexts = [
+          "Create a modern e-commerce website with a dark theme...",
+          "Design a portfolio site for a photographer with gallery...",
+          "Build a landing page for a mobile app with features section...",
+          "Make a blog website with minimalist design and categories...",
+        ];
+
+        let currentPlaceholderIndex = 0;
+        let currentCharIndex = 0;
+        let isDeleting = false;
+        let typingSpeed = 70;
+
+        function typeEffect() {
+          const currentText = placeholderTexts[currentPlaceholderIndex];
+
+          if (isDeleting) {
+            promptInput.setAttribute(
+              "placeholder",
+              currentText.substring(0, currentCharIndex - 1),
+            );
+            currentCharIndex--;
+            typingSpeed = 30;
+          } else {
+            promptInput.setAttribute(
+              "placeholder",
+              currentText.substring(0, currentCharIndex + 1),
+            );
+            currentCharIndex++;
+            typingSpeed = 70;
+          }
+
+          if (!isDeleting && currentCharIndex === currentText.length) {
+            isDeleting = true;
+            typingSpeed = 1500; // Pause at the end
+          } else if (isDeleting && currentCharIndex === 0) {
+            isDeleting = false;
+            currentPlaceholderIndex =
+              (currentPlaceholderIndex + 1) % placeholderTexts.length;
+            typingSpeed = 500; // Pause before starting new text
+          }
+
+          setTimeout(typeEffect, typingSpeed);
+        }
+
+        // Start the typing effect
+        setTimeout(typeEffect, 1000);
+      });
+    </script>
+  </body>
+</html>
